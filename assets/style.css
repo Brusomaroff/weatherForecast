@@ -5,6 +5,10 @@ body{
     background-size: cover;
 }
 
+.description{
+    text-transform: capitalize;
+}
+
 .card{
     justify-content:space-around;
     display: flex;
@@ -67,3 +71,4 @@ h2{
     margin-left: 5px;
     margin-right: 5px;
 }
+

@@ -72,3 +72,11 @@ h2{
     margin-right: 5px;
 }
 
+li{
+    list-style-type: none;
+    margin-bottom: 5px;
+}
+
+ul{
+    padding-left: 0;
+}

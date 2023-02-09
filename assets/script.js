@@ -1,3 +1,10 @@
+var searchHistory = JSON.parse(localStorage.getItem("search-history"))
+var searchHistoryEL = document.querySelector("#searchHistory")
+
+if(!searchHistory) {
+    searchHistory = []
+}
+
 let weather = {
     "apiKey": "b576240786ddb6fa3d66609978aeb3a3",
     fetchweather: function (city) {
@@ -40,11 +47,10 @@ let futureWeather = {
         .then((data) => this.displayfutureWeather(data));
     },
     displayfutureWeather: function(data) {
-        const date = data.list[3].dt_txt;
+        const date = dayjs(data.list[3].dt_txt).format("MM/DD/YYYY");
         const { icon, description } = data.list[3].weather[0];
         const { temp, humidity } = data.list[3].main;
         const { speed } = data.list[3].wind;
-        //console.log(icon,description,temp,humidity,speed)
         document.querySelector(".date1").innerText = date;
         document.querySelector(".icon1").src = "https://openweathermap.org/img/wn/"+ icon + ".png";
         document.querySelector(".description1").innerText = description;
@@ -70,11 +76,10 @@ let futureWeather2 = {
         .then((data) => this.displayfutureWeather2(data));
     },
     displayfutureWeather2: function(data) {
-        const date = data.list[11].dt_txt;
+        const date = dayjs(data.list[11].dt_txt).format("MM/DD/YYYY");
         const { icon, description } = data.list[11].weather[0];
         const { temp, humidity } = data.list[11].main;
         const { speed } = data.list[11].wind;
-        //console.log(icon,description,temp,humidity,speed)
         document.querySelector(".date2").innerText = date;
         document.querySelector(".icon2").src = "https://openweathermap.org/img/wn/"+ icon + ".png";
         document.querySelector(".description2").innerText = description;
@@ -100,11 +105,10 @@ let futureWeather3 = {
         .then((data) => this.displayfutureWeather3(data));
     },
     displayfutureWeather3: function(data) {
-        const date = data.list[19].dt_txt;
+        const date = dayjs(data.list[19].dt_txt).format("MM/DD/YYYY");
         const { icon, description } = data.list[19].weather[0];
         const { temp, humidity } = data.list[19].main;
         const { speed } = data.list[19].wind;
-        //console.log(icon,description,temp,humidity,speed)
         document.querySelector(".date3").innerText = date;
         document.querySelector(".icon3").src = "https://openweathermap.org/img/wn/"+ icon + ".png";
         document.querySelector(".description3").innerText = description;
@@ -130,11 +134,10 @@ let futureWeather4 = {
         .then((data) => this.displayfutureWeather4(data));
     },
     displayfutureWeather4: function(data) {
-        const date = data.list[27].dt_txt;
+        const date = dayjs(data.list[27].dt_txt).format("MM/DD/YYYY");
         const { icon, description } = data.list[27].weather[0];
         const { temp, humidity } = data.list[27].main;
         const { speed } = data.list[27].wind;
-        //console.log(icon,description,temp,humidity,speed)
         document.querySelector(".date4").innerText = date;
         document.querySelector(".icon4").src = "https://openweathermap.org/img/wn/"+ icon + ".png";
         document.querySelector(".description4").innerText = description;
@@ -160,11 +163,10 @@ let futureWeather5 = {
         .then((data) => this.displayfutureWeather5(data));
     },
     displayfutureWeather5: function(data) {
-        const date = data.list[35].dt_txt;
+        const date = dayjs(data.list[35].dt_txt).format("MM/DD/YYYY");
         const { icon, description } = data.list[35].weather[0];
         const { temp, humidity } = data.list[35].main;
         const { speed } = data.list[35].wind;
-        //console.log(icon,description,temp,humidity,speed)
         document.querySelector(".date5").innerText = date;
         document.querySelector(".icon5").src = "https://openweathermap.org/img/wn/"+ icon + ".png";
         document.querySelector(".description5").innerText = description;
@@ -177,6 +179,35 @@ let futureWeather5 = {
     }
 };
 
+function saveSearchHistory() {
+    var cityName = document.querySelector(".search-bar").value;
+    searchHistory.push(cityName);
+    localStorage.setItem("search-history", JSON.stringify(searchHistory))
+}
+
+function loadSearchHistory(){
+    searchHistoryEL.innerHTML = ""
+    for(i in searchHistory){
+        var button = document.createElement("button");
+        var line = document.createElement("li")
+        button.textContent = searchHistory[i];
+        line.append(button);
+        searchHistoryEL.append(line);
+    }
+}
+
+$("#searchHistory").on("click", "button", function(){
+    console.log(this)
+    weather.fetchweather($(this).text()); 
+    futureWeather.fetchfutureWeather($(this).text());
+    futureWeather2.fetchfutureWeather2($(this).text());
+    futureWeather3.fetchfutureWeather3($(this).text());
+    futureWeather4.fetchfutureWeather4($(this).text());
+    futureWeather5.fetchfutureWeather5($(this).text());
+ 
+}) 
+
+
 document
 .querySelector(".search button")
 .addEventListener("click", function () {
@@ -186,6 +217,8 @@ document
     futureWeather3.search();
     futureWeather4.search();
     futureWeather5.search();
+    saveSearchHistory();
+    loadSearchHistory();
 });
 
 document.querySelector(".search-bar").addEventListener("keyup", function (event) {
@@ -196,6 +229,8 @@ document.querySelector(".search-bar").addEventListener("keyup", function (event)
         futureWeather3.search();
         futureWeather4.search();
         futureWeather5.search();
+        saveSearchHistory();
+        loadSearchHistory();
     }
 });
 
@@ -205,3 +240,4 @@ futureWeather2.fetchfutureWeather2("Orlando")
 futureWeather3.fetchfutureWeather3("Orlando")
 futureWeather4.fetchfutureWeather4("Orlando")
 futureWeather5.fetchfutureWeather5("Orlando")
+loadSearchHistory();

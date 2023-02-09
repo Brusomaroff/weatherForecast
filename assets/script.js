@@ -1,10 +1,11 @@
+/* Local storage variables*/
 var searchHistory = JSON.parse(localStorage.getItem("search-history"))
 var searchHistoryEL = document.querySelector("#searchHistory")
 
 if(!searchHistory) {
     searchHistory = []
 }
-
+/* Current Weather */
 let weather = {
     "apiKey": "b576240786ddb6fa3d66609978aeb3a3",
     fetchweather: function (city) {
@@ -33,7 +34,7 @@ let weather = {
         this.fetchweather(document.querySelector(".search-bar").value);
     }
 };
-
+/* Future weather day 1 */
 let futureWeather = {
     "apiKey": "b576240786ddb6fa3d66609978aeb3a3",
     fetchfutureWeather: function (city) {
@@ -62,7 +63,7 @@ let futureWeather = {
         this.fetchfutureWeather(document.querySelector(".search-bar").value);
     }
 };
-
+/* Future weather day 2 */
 let futureWeather2 = {
     "apiKey": "b576240786ddb6fa3d66609978aeb3a3",
     fetchfutureWeather2: function (city) {
@@ -91,7 +92,7 @@ let futureWeather2 = {
         this.fetchfutureWeather2(document.querySelector(".search-bar").value);
     }
 };
-
+/* Future weather day 3 */
 let futureWeather3 = {
     "apiKey": "b576240786ddb6fa3d66609978aeb3a3",
     fetchfutureWeather3: function (city) {
@@ -120,7 +121,7 @@ let futureWeather3 = {
         this.fetchfutureWeather3(document.querySelector(".search-bar").value);
     }
 };
-
+/* Future weather day 4 */
 let futureWeather4 = {
     "apiKey": "b576240786ddb6fa3d66609978aeb3a3",
     fetchfutureWeather4: function (city) {
@@ -149,7 +150,7 @@ let futureWeather4 = {
         this.fetchfutureWeather4(document.querySelector(".search-bar").value);
     }
 };
-
+/* Future weather day 5 */
 let futureWeather5 = {
     "apiKey": "b576240786ddb6fa3d66609978aeb3a3",
     fetchfutureWeather5: function (city) {
@@ -178,7 +179,7 @@ let futureWeather5 = {
         this.fetchfutureWeather5(document.querySelector(".search-bar").value);
     }
 };
-
+/* Local storage functions*/
 function saveSearchHistory() {
     var cityName = document.querySelector(".search-bar").value;
     searchHistory.push(cityName);
@@ -207,7 +208,7 @@ $("#searchHistory").on("click", "button", function(){
  
 }) 
 
-
+/* Search on click search icon*/
 document
 .querySelector(".search button")
 .addEventListener("click", function () {
@@ -220,7 +221,7 @@ document
     saveSearchHistory();
     loadSearchHistory();
 });
-
+/* Search on click enter*/
 document.querySelector(".search-bar").addEventListener("keyup", function (event) {
     if (event.key == "Enter") {
         weather.search();
@@ -233,7 +234,7 @@ document.querySelector(".search-bar").addEventListener("keyup", function (event)
         loadSearchHistory();
     }
 });
-
+/* Default text on screen */
 weather.fetchweather("Orlando")
 futureWeather.fetchfutureWeather("Orlando")
 futureWeather2.fetchfutureWeather2("Orlando")

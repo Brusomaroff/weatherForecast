@@ -13,3 +13,4 @@ THEN I am again presented with current and future conditions for that city
 ---
 Link to my website here
 https://brusomaroff.github.io/weatherForecast/
+![127 0 0 1_5500_index html](https://user-images.githubusercontent.com/120063382/217703756-94b42250-9b9f-40d3-8a23-a927a0ddf069.png)
